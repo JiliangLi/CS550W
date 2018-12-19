@@ -146,15 +146,24 @@ thelist = [[10,12,7,3,12],[3,10,6,2,8],[18,24,17,16,10],[15,21,10,8,12],[1,18,22
 saddle = []
 
 for x in range(5):
+
    coordinate1 = []
+   coordinate2 = []
+
+   biggest = [x,0]
+
    for y in range(1,5):
-      if thelist[x][y] >= thelist[x][y-1]:
-         coordinate1.append([x,y])
+      if thelist[x][y] >= thelist[biggest[0]][biggest[1]]:
+         biggest = [x,y]
+   coordinate1.append(biggest)
 
    for y in range(len(coordinate1)):
+      smallest = [0,coordinate1[y][1]]
       for i in range(1,5):
-         if thelist[i][coordinate1[y][1]] <= thelist[i-1][coordinate1[y][1]]:
-            coordinate2.append([i,coordinate1[y][1]])
+         if thelist[i][coordinate1[y][1]] <= thelist[smallest[0]][smallest[1]]:
+            smallest = [i,coordinate1[y][1]]
+      
+      coordinate2.append(smallest)
 
    for y in range(len(coordinate2)):
       if coordinate2[y] in coordinate1:
